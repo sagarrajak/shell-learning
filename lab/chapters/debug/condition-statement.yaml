@@ -1,0 +1,16 @@
+---
+- name: This is condition statment
+  hosts: all
+  become: false
+  gather_facts: true
+
+  tasks:
+    - name: This is ubunut machine
+      ansible.builtin.debug:
+        msg: This is ubunut machine with version {{ansible_distribution_version}}
+      when: ansible_distribution == "Ubuntu"
+
+    - name: This is when memory is more then 1024
+      ansible.builtin.debug:
+        msg: This is when memory is more then 1024, current memory is {{ansible_memtotal_mb}}
+      when: ansible_memtotal_mb >= 1024

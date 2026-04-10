@@ -1,0 +1,20 @@
+---
+- name: This is versbose example
+  hosts: all
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: This is verbose example
+      ansible.builtin.debug:
+        msg: "This is normal"
+    
+    - name: This is verbose 1
+      ansible.builtin.debug:
+        msg: This is verbose 1
+        verbosity: 1
+    
+    - name: This is verbose 2
+      ansible.builtin.debug:
+        msg: This is verbose 2
+        verbosity: 2

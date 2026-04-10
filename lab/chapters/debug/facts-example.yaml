@@ -1,0 +1,26 @@
+---
+- name: Debug Module Examples - Variables
+  hosts: all
+  become: false
+  gather_facts: true
+
+  tasks:
+    - name: Print hostname
+      ansible.builtin.debug:
+        msg: "System hostname is {{ ansible_hostname }}"
+
+    - name: Print OS distribution
+      ansible.builtin.debug:
+        msg: "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+    - name: Print IP address
+      ansible.builtin.debug:
+        msg: "Primary IP: {{ ansible_default_ipv4.address }}"
+
+    - name: Print memory information
+      ansible.builtin.debug:
+        msg: "Total Memory: {{ ansible_memtotal_mb }} MB"
+
+    - name: Print CPU core information
+      ansible.builtin.debug:
+        msg: "Total CPU Cores (vCPUs): {{ ansible_processor_vcpus }}"

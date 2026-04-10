@@ -1,0 +1,25 @@
+---
+- name: This is simple debug with loop
+  hosts: all
+  gather_facts: true
+  become: false
+
+  vars:
+    package_to_install:
+      - nginx
+      - mysql-server
+      - redis-server
+      - python-pip
+
+  tasks:
+    - name: Print all the packages to install
+      ansible.builtin.debug:
+        msg: "Package to install {{ item }}, install on {{ ansible_default_ipv4.address }}"
+      loop: "{{ package_to_install }}"
+
+    - name: print package with index
+      ansible.builtin.debug:
+        msg: "Package to install {{ item }}, and the index is {{ index +1 }}"
+      loop: "{{ package_to_install }}"
+      loop_control:
+        index_var: index

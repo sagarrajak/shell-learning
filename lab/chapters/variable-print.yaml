@@ -1,0 +1,29 @@
+---
+- name:  Direct variable printing 
+  hosts: all
+  become: false
+  gather_facts: true
+
+  vars:
+    app_name: Debaterr_App
+    app_version: 1.0.0
+    app_branch: prod
+
+  tasks:
+    - name: Current App Name is
+      ansible.builtin.debug:
+        var: app_name
+    
+    - name: Current App version is
+      ansible.builtin.debug:
+        var: app_version
+    
+    - name: Current App branch is
+      ansible.builtin.debug:
+        var: app_branch
+        
+    
+    - name: Print ipv4 addres 
+      ansible.builtin.debug:
+        var: ansible_facts['default_ipv4']
+      

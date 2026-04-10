@@ -1,0 +1,22 @@
+---
+- name: Debug variable example 
+  hosts: all
+  become: false
+  gather_facts: false
+
+  vars:
+    app_name: "web-server"
+    app_version: "1.2.3"
+    deployment_env: "production"
+
+  tasks:
+    - name: Print application information
+      ansible.builtin.debug:
+        msg: "Deploying {{app_name}} with verion {{app_version}} to {{deployment_env}}"
+    
+    - name: Variable with custom format
+      ansible.builtin.debug:
+        msg: |
+          application Name: {{app_name}}
+          App version: {{app_version}}
+          Deployment env: {{deployment_env}}

@@ -1,0 +1,25 @@
+---
+- name:  Ansible hello word
+  hosts: my_nodes
+  gather_facts: false
+
+  tasks:
+      - name: Print welcome message 
+        ansible.builtin.debug:
+          msg: "Hello World! Ansible is successfully connected to {{ inventory_hostname }}"
+      
+      - name: Run simple command 
+        ansible.builtin.command:
+          cmd: uptime
+        register: uptime_result
+      
+      - name: Show uptime results
+        ansible.builtin.debug:
+          msg: "System Uptime: {{ uptime_result.stdout }}"
+
+      - name: Current hostname
+        ansible.builtin.debug:
+          msg: "Current hostname is {{ inventory_hostname }}"
+        
+      
+      

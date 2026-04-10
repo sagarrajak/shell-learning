@@ -1,0 +1,43 @@
+---
+- name: selectattr Filter Demo
+  hosts: localhost
+  connection: local
+  vars:
+    users:
+      - name: alice
+        role: admin
+        active: true
+      - name: bob
+        role: developer
+        active: false
+      - name: charlie
+        role: developer
+        active: true
+      - name: david
+        role: admin
+        active: false
+
+  tasks:
+    - name: Get all admin users
+      ansible.builtin.set_fact:
+        admin_users: "{{ users | selectattr('role', 'equalto', 'admin') | list }}"
+
+    - name: Display admin users
+      ansible.builtin.debug:
+        var: admin_users
+
+    - name: Get active developers
+      ansible.builtin.set_fact:
+        active_devs: "{{ users | selectattr('role', 'equalto', 'developer') | selectattr('active', 'equalto', true) | list }}"
+
+    - name: Display active developers
+      ansible.builtin.debug:
+        var: active_devs
+
+    - name: Extract only names of active users
+      ansible.builtin.set_fact:
+        active_names: "{{ users | selectattr('active', 'equalto', true) | map(attribute='name') | list }}"
+
+    - name: Display active names
+      ansible.builtin.debug:
+        var: active_names

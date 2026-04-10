@@ -1,0 +1,8 @@
+---
+- name: This is basic pause statement
+  hosts: all
+  gather_facts: true
+  become: false
+
+tasks:
+  

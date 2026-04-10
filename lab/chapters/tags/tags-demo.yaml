@@ -1,0 +1,31 @@
+---
+- name: Tags Demo Playbook
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Task 1 - Update System (tagged 'setup')
+      ansible.builtin.debug:
+        msg: "Updating system... (Imagine an apt command here)"
+      tags: setup
+
+    - name: Task 2 - Install Web Server (tagged 'install')
+      ansible.builtin.debug:
+        msg: "Installing Apache... (Imagine an installation here)"
+      tags: install
+
+    - name: Task 3 - Start Web Server (tagged 'service')
+      ansible.builtin.debug:
+        msg: "Starting Apache service..."
+      tags:
+        - service
+        - install
+
+    - name: Task 4 - Always run this task
+      ansible.builtin.debug:
+        msg: "This task runs unless specifically skipped with 'never' or if tags are filtered"
+      tags: always
+
+    - name: Task 5 - Debug info (tagged 'debug')
+      ansible.builtin.debug:
+        msg: "System Debug Info"
+      tags: never
